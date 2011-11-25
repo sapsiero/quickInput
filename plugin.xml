@@ -1,0 +1,19 @@
+<plugin name='quick-input' version='0.1' grailsVersion='2.0 &gt; *'>
+  <author>Tim Rademacher</author>
+  <authorEmail>sapsiero@gmx.de</authorEmail>
+  <title>Quick Input Plugin</title>
+  <description>The plugin provides input fields for date and number input. Both field types support a quick insert, 
+automated formating and simple calculations.
+</description>
+  <documentation>http://grails.org/plugin/quick-input</documentation>
+  <type>QuickInputGrailsPlugin</type>
+  <resources>
+    <resource>NumberFormatFilters</resource>
+    <resource>com.finweb.quickInput.FormatService</resource>
+    <resource>com.finweb.quickInput.FormatTagLib</resource>
+  </resources>
+  <dependencies>
+    <plugin name='jquery-ui' version='1.8.0 &gt; *' />
+  </dependencies>
+  <behavior />
+</plugin>

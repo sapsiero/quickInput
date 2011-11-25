@@ -1,0 +1,10 @@
+introduction:
+ title: Introduction
+install:
+ title: Installation
+usage:
+ title: Usage
+ dateInput: Date Input
+ numberInput: Number Input
+credits:
+ title: Credits

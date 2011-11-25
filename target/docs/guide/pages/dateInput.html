@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>3.1 Date Input 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/install.html"><strong>2</strong><span>Installation</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>3</strong><span>Usage</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/credits.html"><strong>4</strong><span>Credits</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>mass input fields for date and number input
+</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../../guide/install.html">&lt;&lt; <strong>2</strong><span>Installation</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+                    <div class="toc-item next-right"><a href="../../guide/credits.html"><strong>4</strong><span>Credits</span> >></a></div>
+                
+
+
+                <div class="project">
+                    <h1>3.1 Date Input - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Tim Rademacher</p>
+
+                    <p><strong>Version:</strong> 0.1</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h2 id="dateInput">3.1 Date Input</h2>
+<h3>Standard and Quick Input </h3><p class="paragraph"/>This plugin offers to ways of inserting date information. You can either use your countries standard 
+input (e.g. MM/dd/yyyy) or you can use a short input where you just need to enter the number values (e.g. MMddyy).<p class="paragraph"/>The input format depends on and changes with your locale setting within your browser. E.g. if you use an English 
+locale, then the formats are as shown above. If you use a German locale, the standard input is (e.g. dd.MM.yyyy) 
+while the quick input is ddMMyy.<p class="paragraph"/>Both formats can be entered into the same field. They are parsed on client side and formated to the standard format 
+using JavaScript.<p class="paragraph"/><h3>Relation</h3><p class="paragraph"/>If you need to enter multiple date inputs and it might be possible, that those date fields contain the same date, it 
+is possible to relate these date inputs. You can link one date field to another, so whenever the master (linked-to) 
+field changes, the slave (linked) is also changed.<p class="paragraph"/><h3>GSP Tag</h3><p class="paragraph"/>This plugin introduces a new GSP Tag: <code>dateInput</code>.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;qi:dateInput name=<span class="xml&#45;quote">"nameOfField"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/>The tag provides the following attributes:
+<ul class="star">
+<li><strong class="bold">name</strong>: The identifying name of this field ( <em class="italic">mandatory</em> ).</li>
+<li><strong class="bold">value</strong>: The date that is displayed on page rendering ( <em class="italic">default: new Date()</em> ).</li>
+<li><strong class="bold">register</strong>: The name of the field, this is registered to ( <em class="italic">default: none</em> ).</li>
+<li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
+<li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
+</ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
+<ul class="star">
+<li>register</li>
+<li>errornode</li>
+<li>errorclass</li>
+</ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	Date foo<p class="paragraph"/>	Date bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+		foo()
+		bar(attributes: &#91;errorclass:<span class="java&#45;quote">"error"</span>, errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode;"</span>, register: <span class="java&#45;quote">"foo"</span>&#93;)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
+is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well. 
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../../guide/install.html">&lt;&lt; <strong>2</strong><span>Installation</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../../guide/credits.html"><strong>4</strong><span>Credits</span> >></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+h3. Standard and Quick Input 
+
+This plugin offers to ways of inserting date information. You can either use your countries standard 
+input (e.g. MM/dd/yyyy) or you can use a short input where you just need to enter the number values (e.g. MMddyy).
+
+The input format depends on and changes with your locale setting within your browser. E.g. if you use an English 
+locale, then the formats are as shown above. If you use a German locale, the standard input is (e.g. dd.MM.yyyy) 
+while the quick input is ddMMyy.
+
+Both formats can be entered into the same field. They are parsed on client side and formated to the standard format 
+using JavaScript. 
+
+h3. Relation
+
+If you need to enter multiple date inputs and it might be possible, that those date fields contain the same date, it 
+is possible to relate these date inputs. You can link one date field to another, so whenever the master (linked-to) 
+field changes, the slave (linked) is also changed.
+
+h3. GSP Tag
+
+This plugin introduces a new GSP Tag: @dateInput@.
+
+{code:xml}
+<qi:dateInput name="nameOfField" value="${new Date()}" />
+{code}
+
+The tag provides the following attributes:
+* *name*: The identifying name of this field (_mandatory_).
+* *value*: The date that is displayed on page rendering (_default: new Date()_).
+* *register*: The name of the field, this is registered to (_default: none_).
+* *errornode*: The JavaScript node which CSS class should be changed, in case the given input is not a date input (_default: this.parentNode;_).
+* *errorclass*: The CSS class, the errornode gets in case of an error (_default: none_).
+
+h3. Scaffolding
+
+This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
+do this by invoking this command:
+
+{code}
+grails install-quick-template
+{code}
+
+As soon as the template is installed, the following constraint-attributes are possible:
+* register
+* errornode
+* errorclass
+
+Imagine the following domain class:
+
+{code}
+class FooBarDomain {
+	
+	Date foo
+		
+	Date bar
+
+    static constraints = {
+		foo()
+		bar(attributes: [errorclass:"error", errornode:"this.parentNode;", register: "foo"])
+    }
+}
+{code}
+
+This class would automatically generate two fields, one named "foo" and the other named "bar".
+
+The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
+is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well. 
