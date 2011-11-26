@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>Quick Input Plugin 0.1</title>
+        <title>Grails Quick Input Plugin 0.1</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
         <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
@@ -44,8 +44,7 @@ function addJsClass(el) {
                 
                 
             </div>
-            <p>mass input fields for date and number input
-</p>
+            <p>Providing quick input of dates and numbers to your application</p>
         </div>
 
 
@@ -57,7 +56,7 @@ function addJsClass(el) {
                         <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                         <div class="project">
-                            <h1>Quick Input Plugin - Reference Documentation</h1>
+                            <h1>Grails Quick Input Plugin - Reference Documentation</h1>
                             <p><strong>Authors:</strong> Tim Rademacher</p>
                             <p><strong>Version:</strong> 0.1</p>
                             
@@ -85,27 +84,27 @@ function addJsClass(el) {
                         
 
 <h1 id="introduction">1 Introduction</h1>
+This plugin provides new input tags supporting some mass input capabilities.<p class="paragraph"/>They provide functions to easily input
 <ul class="star">
-<li>Input fields for easy input -&#62; JavaScript supported</li>
-<li>For mass input</li>
-<li>Dependant fields -&#62; propagate data from one field to another</li>
-<li>Two ways:</li>
-<ul class="star">
-<li>Number Field</li>
-<li>Date Field</li>
-</ul></ul><p class="paragraph"/>* 
+<li>dates, only using the number values, and</li>
+<li>number.</li>
+</ul><p class="paragraph"/>Main feature is that you can link (relate) one field to another. Whenever you change a field, the related field is change.<p class="paragraph"/>For date fields, the related field is changed 1:1.<p class="paragraph"/>For number fields you can use functions, to calculate the related field.<p class="paragraph"/>The plugin supports grails from 2.0.0 onwards.
+
 
 
 <h1 id="install">2 Installation</h1>
-<ul class="star">
-<li>install plugin jquery-ui since 2.0.0.RC1 does not support transitional dependencies</li>
-<li>install plugin</li>
-<li>execute script to enable scaffolding</li>
-</ul><p class="paragraph"/>
+<blockquote class="note">
+If you install the plugin using grails 2.0.0.RC1 then you need to install the jquery-ui plugin beforehand.
+</blockquote><p class="paragraph"/>Install the plugin using<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin http://sapsiero.com/project&#45;resources/quickInput/releases/grails&#45;quick&#45;input&#45;0.1.zip</pre></div><p class="paragraph"/>If you want to use the automated scaffolding, install the template by executing<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>Make source that the following references are included in your /grails-app/views/layouts/main.gsp:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript library=<span class="xml&#45;quote">"jquery"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;r:require module=<span class="xml&#45;quote">"jquery&#45;ui"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;r:layoutResources/&#62;</span>
+<span class="xml&#45;tag">&#60;script src='$&#123;resource(dir: 'js', file: 'quickInput.js')&#125;' type='text/javascript'&#62;</span><span class="xml&#45;tag">&#60;/script&#62;</span></pre></div>
+
 
 
 <h1 id="usage">3 Usage</h1>
-Information
+Use this plugin by invoking the following tags.
+
 
 
 <h2 id="dateInput">3.1 Date Input</h2>
@@ -123,47 +122,68 @@ field changes, the slave (linked) is also changed.<p class="paragraph"/><h3>GSP 
 <li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
 <li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
 </ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
-do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>For more information see <a href="../guide/single.html#install" class="guide">Installation Chapter</a>.<p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
 <ul class="star">
 <li>register</li>
 <li>errornode</li>
 <li>errorclass</li>
 </ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	Date foo<p class="paragraph"/>	Date bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
 		foo()
-		bar(attributes: &#91;errorclass:<span class="java&#45;quote">"error"</span>, errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode;"</span>, register: <span class="java&#45;quote">"foo"</span>&#93;)
+		bar(attributes: &#91;
+            errorclass:<span class="java&#45;quote">"error"</span>, 
+            errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode"</span>, 
+            register: <span class="java&#45;quote">"foo"</span>&#93;)
     &#125;
 &#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
 is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well. 
 
 
+
 <h2 id="numberInput">3.2 Number Input</h2>
+<h3>Standard and Quick Input </h3><p class="paragraph"/>This plugin offers to ways of inserting number information. You can either use your countries standard 
+input (e.g. 1,234,567.21) or you can use a short input where you can leave out the thousand delimiter (e.g. 1234567.21).<p class="paragraph"/>The input format depends on and changes with your locale setting within your browser. E.g. if you use an English 
+locale, then the formats are as shown above. If you use a German locale, the standard input is (e.g. 1.234.567,21) 
+while the quick input is 1234567.21.<p class="paragraph"/>Both formats can be entered into the same field. They are parsed on client side and formated to the standard format using JavaScript.<p class="paragraph"/><h3>Relation</h3><p class="paragraph"/>If you need to enter multiple number inputs and it might be possible, that those date fields contain the same number or a derived number, it 
+is possible to relate these number inputs. You can link one number field to another, so whenever the master (linked-to) 
+field changes, the slave (linked) is also changed.<p class="paragraph"/>It is not only possible to tranfer a certain value to another field, but also to apply small calculations.<p class="paragraph"/><h3>GSP Tag</h3><p class="paragraph"/>This plugin introduces a new GSP Tag: <code>numberInput</code>.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;qi:numberInput name=<span class="xml&#45;quote">"nameOfField"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/>The tag provides the following attributes:
 <ul class="star">
-<li>Quick Input</li>
-<li>Standard Input</li>
-<li>Language dependant</li>
-<li>Relation (calculation)</li>
-<li>New Tag &#60;qi:numberInput /&#62;</li>
+<li><strong class="bold">name</strong>: The identifying name of this field ( <em class="italic">mandatory</em> ).</li>
+<li><strong class="bold">value</strong>: The date that is displayed on page rendering ( <em class="italic">default: 0.0</em> ).</li>
+<li><strong class="bold">decimals</strong>: Number of decimals ( <em class="italic">default: 2</em> ).</li>
+<li><strong class="bold">function</strong>: Function that is evaluated, if a related field changes( <em class="italic">default: none</em> ). You can use all valid JavaScript code. If you need to reference to a fields content, just add the name (this is automatically replaced by a document.getElementByName). E.g. if you want a field to be calculated using another field (name: "master") and add 2, just type: "master + 2".</li>
+<li><strong class="bold">register</strong>: The name of the field or fields separated by comma, this is registered to ( <em class="italic">default: none</em> ). If a field is registered to another, it is automatically updated, whenever the master changes.</li>
+<li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
+<li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
+</ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
 <ul class="star">
-<li>Parameter</li>
-</ul>
-<li>Scaffolding</li>
-<ul class="star">
-<li>Hints in Domain Classes</li>
-</ul></ul><p class="paragraph"/>
+<li>decimals</li>
+<li>function</li>
+<li>register</li>
+<li>errornode</li>
+<li>errorclass</li>
+</ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	<span class="java&#45;object">Number</span> foo<p class="paragraph"/>	<span class="java&#45;object">Number</span> bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+		foo()
+		bar(attributes: &#91;decimals: 6, 
+                function: <span class="java&#45;quote">"foo &#42; 2.123456"</span>, 
+                errorclass:<span class="java&#45;quote">"error"</span>, 
+                errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode"</span>, 
+                register: <span class="java&#45;quote">"foo"</span>&#93;)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
+is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well, according to the function "foo * 2.123456". Incontrast to "foo", "bar" has 6 decimals. 
+
 
 
 <h1 id="credits">4 Credits</h1>
-<ul class="star">
-<li>Apache License</li>
-<li>Updates</li>
-<ul class="star">
-<li>Github</li>
-</ul>
-<li>Contact</li>
-<ul class="star">
-<li>sapsiero@gmx.de</li>
-<li>@sapsiero</li>
-</ul></ul><p class="paragraph"/>
+<h3>License</h3><p class="paragraph"/>This plug-in comes with Apache License 2.0:<p class="paragraph"/>Copyright 2011 Tim Rademacher<p class="paragraph"/>Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at<p class="paragraph"/>   http://www.apache.org/licenses/LICENSE-2.0<p class="paragraph"/>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.<p class="paragraph"/><h3>Updates</h3><p class="paragraph"/>For updates go visit <a href="http://sapsiero.com/" target="blank">http://sapsiero.com/</a><p class="paragraph"/><h3>Github</h3><p class="paragraph"/>The source of this project is hosted on github:<p class="paragraph"/><a href="http://github.com/sapsiero/quickInput" target="blank">http://github.com/sapsiero/quickInput</a><p class="paragraph"/><h3>Contact</h3><p class="paragraph"/>Mail: sapsiero&#64;gmx.de<p class="paragraph"/>Twitter: <a href="http://twitter.com/#!/sapsiero" target="blank">@sapsiero</a>
+
 
                     </div>
                 </td>
@@ -182,8 +202,8 @@ is also registered to "foo", so whenever "foo" changes, "bar" will be changed as
         </table>
 
         <div id="footer">
-            
-            
+            copyright 2011 Tim Rademacher
+            Visit sapsiero.com
         </div>
 
 

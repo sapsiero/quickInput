@@ -40,6 +40,8 @@ do this by invoking this command:
 grails install-quick-template
 {code}
 
+For more information see [Installation Chapter|guide:install].
+
 As soon as the template is installed, the following constraint-attributes are possible:
 * register
 * errornode
@@ -56,7 +58,10 @@ class FooBarDomain {
 
     static constraints = {
 		foo()
-		bar(attributes: [errorclass:"error", errornode:"this.parentNode;", register: "foo"])
+		bar(attributes: [
+            errorclass:"error", 
+            errornode:"this.parentNode", 
+            register: "foo"])
     }
 }
 {code}

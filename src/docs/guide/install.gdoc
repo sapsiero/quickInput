@@ -1,3 +1,24 @@
-* install plugin jquery-ui since 2.0.0.RC1 does not support transitional dependencies
-* install plugin
-* execute script to enable scaffolding  
+{note}
+If you install the plugin using grails 2.0.0.RC1 then you need to install the jquery-ui plugin beforehand.
+{note}
+
+Install the plugin using
+
+{code}
+    grails install-plugin http://sapsiero.com/project-resources/quickInput/releases/grails-quick-input-0.1.zip
+{code}
+
+If you want to use the automated scaffolding, install the template by executing
+
+{code}
+    grails install-quick-template
+{code}
+
+Make source that the following references are included in your /grails-app/views/layouts/main.gsp:
+
+{code:xml}
+<g:javascript library="jquery" />
+<r:require module="jquery-ui" />
+<r:layoutResources/>
+<script src='${resource(dir: 'js', file: 'quickInput.js')}' type='text/javascript'></script>
+{code}

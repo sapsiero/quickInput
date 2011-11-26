@@ -49,8 +49,7 @@ function addJsClass() {
         
         
     </div>
-    <p>mass input fields for date and number input
-</p>
+    <p>Providing quick input of dates and numbers to your application</p>
 </div>
 
 
@@ -96,7 +95,8 @@ function addJsClass() {
                 
 
 <h1 id="usage">3 Usage</h1>
-Information
+Use this plugin by invoking the following tags.
+
 
 
 <h2 id="dateInput">3.1 Date Input</h2>
@@ -114,33 +114,57 @@ field changes, the slave (linked) is also changed.<p class="paragraph"/><h3>GSP 
 <li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
 <li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
 </ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
-do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>For more information see <a href="../guide/single.html#install" class="guide">Installation Chapter</a>.<p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
 <ul class="star">
 <li>register</li>
 <li>errornode</li>
 <li>errorclass</li>
 </ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	Date foo<p class="paragraph"/>	Date bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
 		foo()
-		bar(attributes: &#91;errorclass:<span class="java&#45;quote">"error"</span>, errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode;"</span>, register: <span class="java&#45;quote">"foo"</span>&#93;)
+		bar(attributes: &#91;
+            errorclass:<span class="java&#45;quote">"error"</span>, 
+            errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode"</span>, 
+            register: <span class="java&#45;quote">"foo"</span>&#93;)
     &#125;
 &#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
 is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well. 
 
 
+
 <h2 id="numberInput">3.2 Number Input</h2>
+<h3>Standard and Quick Input </h3><p class="paragraph"/>This plugin offers to ways of inserting number information. You can either use your countries standard 
+input (e.g. 1,234,567.21) or you can use a short input where you can leave out the thousand delimiter (e.g. 1234567.21).<p class="paragraph"/>The input format depends on and changes with your locale setting within your browser. E.g. if you use an English 
+locale, then the formats are as shown above. If you use a German locale, the standard input is (e.g. 1.234.567,21) 
+while the quick input is 1234567.21.<p class="paragraph"/>Both formats can be entered into the same field. They are parsed on client side and formated to the standard format using JavaScript.<p class="paragraph"/><h3>Relation</h3><p class="paragraph"/>If you need to enter multiple number inputs and it might be possible, that those date fields contain the same number or a derived number, it 
+is possible to relate these number inputs. You can link one number field to another, so whenever the master (linked-to) 
+field changes, the slave (linked) is also changed.<p class="paragraph"/>It is not only possible to tranfer a certain value to another field, but also to apply small calculations.<p class="paragraph"/><h3>GSP Tag</h3><p class="paragraph"/>This plugin introduces a new GSP Tag: <code>numberInput</code>.<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;qi:numberInput name=<span class="xml&#45;quote">"nameOfField"</span> value=<span class="xml&#45;quote">"$&#123;new Date()&#125;"</span> /&#62;</span></pre></div><p class="paragraph"/>The tag provides the following attributes:
 <ul class="star">
-<li>Quick Input</li>
-<li>Standard Input</li>
-<li>Language dependant</li>
-<li>Relation (calculation)</li>
-<li>New Tag &#60;qi:numberInput /&#62;</li>
+<li><strong class="bold">name</strong>: The identifying name of this field ( <em class="italic">mandatory</em> ).</li>
+<li><strong class="bold">value</strong>: The date that is displayed on page rendering ( <em class="italic">default: 0.0</em> ).</li>
+<li><strong class="bold">decimals</strong>: Number of decimals ( <em class="italic">default: 2</em> ).</li>
+<li><strong class="bold">function</strong>: Function that is evaluated, if a related field changes( <em class="italic">default: none</em> ). You can use all valid JavaScript code. If you need to reference to a fields content, just add the name (this is automatically replaced by a document.getElementByName). E.g. if you want a field to be calculated using another field (name: "master") and add 2, just type: "master + 2".</li>
+<li><strong class="bold">register</strong>: The name of the field or fields separated by comma, this is registered to ( <em class="italic">default: none</em> ). If a field is registered to another, it is automatically updated, whenever the master changes.</li>
+<li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
+<li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
+</ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
 <ul class="star">
-<li>Parameter</li>
-</ul>
-<li>Scaffolding</li>
-<ul class="star">
-<li>Hints in Domain Classes</li>
-</ul></ul><p class="paragraph"/>
+<li>decimals</li>
+<li>function</li>
+<li>register</li>
+<li>errornode</li>
+<li>errorclass</li>
+</ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	<span class="java&#45;object">Number</span> foo<p class="paragraph"/>	<span class="java&#45;object">Number</span> bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
+		foo()
+		bar(attributes: &#91;decimals: 6, 
+                function: <span class="java&#45;quote">"foo &#42; 2.123456"</span>, 
+                errorclass:<span class="java&#45;quote">"error"</span>, 
+                errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode"</span>, 
+                register: <span class="java&#45;quote">"foo"</span>&#93;)
+    &#125;
+&#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
+is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well, according to the function "foo * 2.123456". Incontrast to "foo", "bar" has 6 decimals. 
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
@@ -167,8 +191,8 @@ is also registered to "foo", so whenever "foo" changes, "bar" will be changed as
 </table>
 
 <div id="footer">
-    
-    
+    copyright 2011 Tim Rademacher
+    Visit sapsiero.com
 </div>
 
 <script type="text/javascript" src="../js/docs.js"></script>

@@ -9,9 +9,10 @@ includeTargets << grailsScript("_GrailsInit")
 includeTargets << grailsScript("_GrailsBootstrap")
 
 target('default': "Installs Quick Input scaffolding templates") {
-	depends(checkVersion, parseArguments, loadApp)
+	depends(checkVersion, parseArguments, packageApp, classpath)
+    loadApp()
 	
-	targetDir = "${basedir}/src/templates/test"
+	targetDir = "${basedir}/src/templates/scaffolding"
 	overwrite = false
 	
 	if (new File(targetDir).exists()) {
@@ -24,8 +25,8 @@ target('default': "Installs Quick Input scaffolding templates") {
 	
 	def plugin = appCtx.getBean('pluginManager').getGrailsPlugin('quickInput')
 	
-	ant.copy(todir: "$targetDir/scaffolding") {
-		fileset(dir: "${grailsSettings.projectPluginsDir}/${plugin.name}-${plugin.version}/*")
+	ant.copy(todir: "$targetDir") {
+		fileset(dir: "${grailsSettings.projectPluginsDir}/${grails.util.GrailsNameUtils.getScriptName(plugin.name)}-${plugin.version}/src/templates/")
 	}
 	
 	event("StatusUpdate", [ "Templates installed successfully"])

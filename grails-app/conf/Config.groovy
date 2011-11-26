@@ -24,3 +24,10 @@ log4j = {
 }
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
+
+grails.doc.title="Grails Quick Input Plugin"
+grails.doc.subtitle="Providing quick input of dates and numbers to your application"
+grails.doc.author="Tim Rademacher"
+grails.doc.license="Apache V2.0"
+grails.doc.copyright="copyright 2011 Tim Rademacher"
+grails.doc.footer="Visit sapsiero.com"

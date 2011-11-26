@@ -49,8 +49,7 @@ function addJsClass() {
         
         
     </div>
-    <p>mass input fields for date and number input
-</p>
+    <p>Providing quick input of dates and numbers to your application</p>
 </div>
 
 
@@ -85,11 +84,13 @@ function addJsClass() {
                 
 
 <h1 id="install">2 Installation</h1>
-<ul class="star">
-<li>install plugin jquery-ui since 2.0.0.RC1 does not support transitional dependencies</li>
-<li>install plugin</li>
-<li>execute script to enable scaffolding</li>
-</ul><p class="paragraph"/>
+<blockquote class="note">
+If you install the plugin using grails 2.0.0.RC1 then you need to install the jquery-ui plugin beforehand.
+</blockquote><p class="paragraph"/>Install the plugin using<p class="paragraph"/><div class="code"><pre>grails install&#45;plugin http://sapsiero.com/project&#45;resources/quickInput/releases/grails&#45;quick&#45;input&#45;0.1.zip</pre></div><p class="paragraph"/>If you want to use the automated scaffolding, install the template by executing<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>Make source that the following references are included in your /grails-app/views/layouts/main.gsp:<p class="paragraph"/><div class="code"><pre><span class="xml&#45;tag">&#60;g:javascript library=<span class="xml&#45;quote">"jquery"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;r:require module=<span class="xml&#45;quote">"jquery&#45;ui"</span> /&#62;</span>
+<span class="xml&#45;tag">&#60;r:layoutResources/&#62;</span>
+<span class="xml&#45;tag">&#60;script src='$&#123;resource(dir: 'js', file: 'quickInput.js')&#125;' type='text/javascript'&#62;</span><span class="xml&#45;tag">&#60;/script&#62;</span></pre></div>
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
@@ -116,8 +117,8 @@ function addJsClass() {
 </table>
 
 <div id="footer">
-    
-    
+    copyright 2011 Tim Rademacher
+    Visit sapsiero.com
 </div>
 
 <script type="text/javascript" src="../js/docs.js"></script>

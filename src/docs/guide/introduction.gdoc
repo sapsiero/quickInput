@@ -1,8 +1,13 @@
-* Input fields for easy input -> JavaScript supported
-* For mass input
-* Dependant fields -> propagate data from one field to another
-* Two ways:  
-** Number Field
-** Date Field
+This plugin provides new input tags supporting some mass input capabilities.
 
-* 
+They provide functions to easily input
+* dates, only using the number values, and
+* number.
+
+Main feature is that you can link (relate) one field to another. Whenever you change a field, the related field is change.
+
+For date fields, the related field is changed 1:1.
+
+For number fields you can use functions, to calculate the related field.
+
+The plugin supports grails from 2.0.0 onwards.

@@ -49,8 +49,7 @@ function addJsClass() {
         
         
     </div>
-    <p>mass input fields for date and number input
-</p>
+    <p>Providing quick input of dates and numbers to your application</p>
 </div>
 
 
@@ -99,17 +98,21 @@ field changes, the slave (linked) is also changed.<p class="paragraph"/><h3>GSP 
 <li><strong class="bold">errornode</strong>: The JavaScript node which CSS class should be changed, in case the given input is not a date input ( <em class="italic">default: this.parentNode;</em> ).</li>
 <li><strong class="bold">errorclass</strong>: The CSS class, the errornode gets in case of an error ( <em class="italic">default: none</em> ).</li>
 </ul><p class="paragraph"/><h3>Scaffolding</h3><p class="paragraph"/>This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
-do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
+do this by invoking this command:<p class="paragraph"/><div class="code"><pre>grails install&#45;quick&#45;template</pre></div><p class="paragraph"/>For more information see <a href="../guide/single.html#install" class="guide">Installation Chapter</a>.<p class="paragraph"/>As soon as the template is installed, the following constraint-attributes are possible:
 <ul class="star">
 <li>register</li>
 <li>errornode</li>
 <li>errorclass</li>
 </ul><p class="paragraph"/>Imagine the following domain class:<p class="paragraph"/><div class="code"><pre>class FooBarDomain &#123;<p class="paragraph"/>	Date foo<p class="paragraph"/>	Date bar<p class="paragraph"/>    <span class="java&#45;keyword">static</span> constraints = &#123;
 		foo()
-		bar(attributes: &#91;errorclass:<span class="java&#45;quote">"error"</span>, errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode;"</span>, register: <span class="java&#45;quote">"foo"</span>&#93;)
+		bar(attributes: &#91;
+            errorclass:<span class="java&#45;quote">"error"</span>, 
+            errornode:<span class="java&#45;quote">"<span class="java&#45;keyword">this</span>.parentNode"</span>, 
+            register: <span class="java&#45;quote">"foo"</span>&#93;)
     &#125;
 &#125;</pre></div><p class="paragraph"/>This class would automatically generate two fields, one named "foo" and the other named "bar".<p class="paragraph"/>The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
 is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well. 
+
 
 
                 <div style="clear:both;margin-top:15px;"></div>
@@ -136,8 +139,8 @@ is also registered to "foo", so whenever "foo" changes, "bar" will be changed as
 </table>
 
 <div id="footer">
-    
-    
+    copyright 2011 Tim Rademacher
+    Visit sapsiero.com
 </div>
 
 <script type="text/javascript" src="../js/docs.js"></script>

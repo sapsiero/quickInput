@@ -2,8 +2,7 @@
   <author>Tim Rademacher</author>
   <authorEmail>sapsiero@gmx.de</authorEmail>
   <title>Quick Input Plugin</title>
-  <description>The plugin provides input fields for date and number input. Both field types support a quick insert, 
-automated formating and simple calculations.
+  <description>mass input fields for date and number input
 </description>
   <documentation>http://grails.org/plugin/quick-input</documentation>
   <type>QuickInputGrailsPlugin</type>
@@ -12,8 +11,6 @@ automated formating and simple calculations.
     <resource>com.finweb.quickInput.FormatService</resource>
     <resource>com.finweb.quickInput.FormatTagLib</resource>
   </resources>
-  <dependencies>
-    <plugin name='jquery-ui' version='1.8.0 &gt; *' />
-  </dependencies>
+  <dependencies />
   <behavior />
 </plugin>

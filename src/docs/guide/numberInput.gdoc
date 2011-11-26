@@ -1,8 +1,76 @@
-* Quick Input
-* Standard Input
-* Language dependant
-* Relation (calculation)
-* New Tag <qi:numberInput />
-** Parameter
-* Scaffolding
-** Hints in Domain Classes
+h3. Standard and Quick Input 
+
+This plugin offers to ways of inserting number information. You can either use your countries standard 
+input (e.g. 1,234,567.21) or you can use a short input where you can leave out the thousand delimiter (e.g. 1234567.21).
+
+The input format depends on and changes with your locale setting within your browser. E.g. if you use an English 
+locale, then the formats are as shown above. If you use a German locale, the standard input is (e.g. 1.234.567,21) 
+while the quick input is 1234567.21.
+
+Both formats can be entered into the same field. They are parsed on client side and formated to the standard format using JavaScript.
+
+h3. Relation
+
+If you need to enter multiple number inputs and it might be possible, that those date fields contain the same number or a derived number, it 
+is possible to relate these number inputs. You can link one number field to another, so whenever the master (linked-to) 
+field changes, the slave (linked) is also changed.
+
+It is not only possible to tranfer a certain value to another field, but also to apply small calculations.
+
+h3. GSP Tag
+
+This plugin introduces a new GSP Tag: @numberInput@.
+
+{code:xml}
+<qi:numberInput name="nameOfField" value="${new Date()}" />
+{code}
+
+The tag provides the following attributes:
+* *name*: The identifying name of this field (_mandatory_).
+* *value*: The date that is displayed on page rendering (_default: 0.0_).
+* *decimals*: Number of decimals (_default: 2_).
+* *function*: Function that is evaluated, if a related field changes(_default: none_). You can use all valid JavaScript code. If you need to reference to a fields content, just add the name (this is automatically replaced by a document.getElementByName). E.g. if you want a field to be calculated using another field (name: "master") and add 2, just type: "master + 2".
+* *register*: The name of the field or fields separated by comma, this is registered to (_default: none_). If a field is registered to another, it is automatically updated, whenever the master changes.
+* *errornode*: The JavaScript node which CSS class should be changed, in case the given input is not a date input (_default: this.parentNode;_).
+* *errorclass*: The CSS class, the errornode gets in case of an error (_default: none_).
+
+h3. Scaffolding
+
+This plugin fully supports scaffolding, as long as the change to the scaffolding templates is installed. You can
+do this by invoking this command:
+
+{code}
+grails install-quick-template
+{code}
+
+As soon as the template is installed, the following constraint-attributes are possible:
+* decimals
+* function
+* register
+* errornode
+* errorclass
+
+Imagine the following domain class:
+
+{code}
+class FooBarDomain {
+	
+	Number foo
+		
+	Number bar
+
+    static constraints = {
+		foo()
+		bar(attributes: [decimals: 6, 
+                function: "foo * 2.123456", 
+                errorclass:"error", 
+                errornode:"this.parentNode", 
+                register: "foo"])
+    }
+}
+{code}
+
+This class would automatically generate two fields, one named "foo" and the other named "bar".
+
+The first one only uses default attributes, while the second has a particular errornode and errorclass. The "bar" field
+is also registered to "foo", so whenever "foo" changes, "bar" will be changed as well, according to the function "foo * 2.123456". Incontrast to "foo", "bar" has 6 decimals. 
