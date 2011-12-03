@@ -1,11 +1,7 @@
-{note}
-If you install the plugin using grails 2.0.0.RC1 then you need to install the jquery-ui plugin beforehand.
-{note}
-
 Install the plugin using
 
 {code}
-    grails install-plugin http://sapsiero.com/project-resources/quickInput/releases/grails-quick-input-0.1.zip
+    grails install-plugin http://sapsiero.com/project-resources/quickInput/releases/grails-quick-input-latest.zip
 {code}
 
 If you want to use the automated scaffolding, install the template by executing

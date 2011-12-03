@@ -32,6 +32,6 @@ grails.project.dependency.resolution = {
               ":release:1.0.0.RC3") {
             export = false
         }
-		compile ":jquery-ui:[1.8.0,)"
+		compile ":jquery-ui:[1.8.15,)"
     }
 }

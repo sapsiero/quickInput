@@ -1,4 +1,4 @@
-<plugin name='quick-input' version='0.1' grailsVersion='2.0 &gt; *'>
+<plugin name='quick-input' version='0.1.1' grailsVersion='2.0 &gt; *'>
   <author>Tim Rademacher</author>
   <authorEmail>sapsiero@gmx.de</authorEmail>
   <title>Quick Input Plugin</title>
@@ -11,6 +11,21 @@
     <resource>com.finweb.quickInput.FormatService</resource>
     <resource>com.finweb.quickInput.FormatTagLib</resource>
   </resources>
+  <repositories>
+    <repository name='grailsCentral' url='http://plugins.grails.org' />
+    <repository name='http://repo.grails.org/grails/plugins' url='http://repo.grails.org/grails/plugins/' />
+    <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
+    <repository name='grailsCore' url='http://svn.codehaus.org/grails/trunk/grails-plugins' />
+    <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
+  </repositories>
   <dependencies />
+  <plugins>
+    <compile>
+      <plugin group='org.grails.plugins' name='jquery-ui' version='[1.8.15,)' />
+    </compile>
+  </plugins>
+  <runtimePluginRequirements>
+    <plugin name='jquery-ui' version='1.8.15 &gt; *' />
+  </runtimePluginRequirements>
   <behavior />
 </plugin>
