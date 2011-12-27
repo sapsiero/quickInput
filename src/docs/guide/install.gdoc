@@ -1,7 +1,7 @@
 Install the plugin using
 
 {code}
-    grails install-plugin http://sapsiero.com/project-resources/quickInput/releases/grails-quick-input-latest.zip
+    grails install-plugin quick-input
 {code}
 
 If you want to use the automated scaffolding, install the template by executing
